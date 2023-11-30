@@ -43,3 +43,86 @@ The dataset contains weather information (Temperature, Humidity, Windspeed, Visi
 * **Holiday**: If the day is holiday period or not, type: str
 
 * **Functioning Day**: If the day is a Functioning Day or not, type : str
+
+## Technical Overview
+### Exploratory Data Analysis (EDA)
+![image](https://github.com/roy-rajarshi-27/Seoul-Bike-Sharing-Demand-Prediction-Project/assets/126455566/2e2c438b-fa04-45ab-bc89-23e81c9714ee)
+![image](https://github.com/roy-rajarshi-27/Seoul-Bike-Sharing-Demand-Prediction-Project/assets/126455566/fb055246-f581-48d5-a185-879217bf9c96)
+![image](https://github.com/roy-rajarshi-27/Seoul-Bike-Sharing-Demand-Prediction-Project/assets/126455566/5ebf09cf-6656-4bae-b851-0c2af27ab057)
+![image](https://github.com/roy-rajarshi-27/Seoul-Bike-Sharing-Demand-Prediction-Project/assets/126455566/a8656345-ed36-4d6e-9635-96870945e838)
+
+**Summary**
+1. Generally people use rented bikes during their working hour from 7am to 9am and 5pm to 9pm.
+
+2. The demand of the rented bike is high in May, June, July, August, September as compare to other months.these months are comes inside the summer season.
+
+3. In the week days(Peak Time: 7 am to 9 am, 5 pm to 9 pm) the demand of the bike higher because of the office.
+
+4. On weekend days, the demand of rented bikes are very low specially in the morning hour but from 4 pm to 8 pm the demand slightly increases.
+
+5. Peoples use rented bikes mostly on functioning day.
+
+6. Highest rented bike : in summer season(peak time: 7am-9am and 5pm-9pm), lowest rented bike : in winter season, highest rented bike on holidays : in May-June month, lowest rented bike on holidays : in December-January-February month
+
+7. The use of rented bike is highest when there is no holiday(peak time: 2pm-8pm)
+
+![image](https://github.com/roy-rajarshi-27/Seoul-Bike-Sharing-Demand-Prediction-Project/assets/126455566/1032ae9e-afd9-43f7-b641-f23f4c1ccd76)
+
+8. From the above plot we see that people like to ride bikes when it is pretty hot around 25°C average.
+9. We can see from the above plot that the demand of rented bike is uniformly distributed despite of wind speed but when the speed of wind was 7 m/s then the demand of bike also increase that clearly means peoples love to ride bikes when its little windy.
+10. from the above plot we see that, the amount of rented bikes is huge, when there is solar radiation. when there is increase in solar radiation, there is increase in rented bike.
+11. we can see from above plot, when there is no rain, rented bike count is huge, but when there is rain, we can see increase in bike rented only at certain points, maybe it is when people are going to home from office on weekdays. but otherwise,there is no huge spike in the rented bike.
+12. We can see from the plot that, on the y-axis, the amount of rented bike is very low When we have more than 4 cm of snow, the bike rents is much lower
+
+![image](https://github.com/roy-rajarshi-27/Seoul-Bike-Sharing-Demand-Prediction-Project/assets/126455566/9903bb48-a7c7-494e-af5f-64c3991098bf)
+
+13. From the above regression plot of all numerical features we see that the columns Temperature, Wind_speed, Solar_Radiation Snowfall are positively relation to the target variable.which means the rented bike count increases with increase of these features.
+14. Rainfall, Snowfall, Humidity these features are negatively related with the target variable which means the rented bike count decreases when these features increase.
+
+### **Feature Selection**
+![image](https://github.com/roy-rajarshi-27/Seoul-Bike-Sharing-Demand-Prediction-Project/assets/126455566/b39641fe-154b-4cb0-8b6b-9162df16836f)
+
+We can observe on the heatmap that on the target variable line the most positively correlated variables to the bike rent are :
+
+* the temperature
+* the dew point temperature
+* the solar radiation
+* Hour
+
+And most negatively correlated variables are:
+
+* Humidity
+* Rainfall
+* weekdays or weekends
+
+from above correlation map, we can see that, there is high correlation between 'Dew Point Temperature' and Temperature. here we are featuring the best suitable model,sp we have to drop either one of the feature i.e. either Temperature or Dew Point Temperature.
+
+### **Modelling**
+Different Models which are used in the Project:
+* Linear Regression
+* Ridge Regression
+* Decision Tree Regressor with GridSearchCV
+* Random Forest
+* Gradient Boosting Regressor
+* Gradient Boosting with GridSearchCV
+* XGBoost with RandomisedSearchCV
+
+**Results Table of different Models**
+| Model_Name                                | R^2 of train datset | Adjusted R^2 of train datset | R^2 of test datset | Adjusted R^2 of test datset |
+|-------------------------------------------|---------------------|------------------------------|--------------------|-----------------------------|
+| Linear Regression                         | 80.4%               | 79.9%                        | 80.5%              | 80%                         |
+| Ridge Regression                          | 80%                 | 79%                          | 80.5%              | 80%                         |
+| Decision Tree with GridSearchCV           | 94%                 | 93.9%                        | 85.4%              | 85%                         |
+| Random Forest                             | 98.9%               | 98.8%                        | 91.3%              | 91%                         |
+| Gradient Boosting                         | 86.3%               | 85.9%                        | 84.6%              | 84.1%                       |
+| Gradient Boosting with GridSearchCV       | 95.4%               | 95.1%                        | 91.5%              | 91.2%                       |
+| XgBoost Regressor with RandomisedSearchCV | 97%                 | 96.9%                        | 91.7%              | 91.5%                       |
+
+**Conclusion**
+* No overfitting is seen.
+
+* Random forest Regressor, Gradient Boosting gridsearchcv, XgBoost Regressor with RandomizedSearchCV gives the highest R2 score.
+
+* Feature Importance value for Random Forest, Gradient Boosting, XgBoost are different.
+
+* We can deploy Random Forest, Gradient Boosting with GridSearchCV, XgBoost with RandomizedSearchCV model.
